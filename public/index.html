@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voi Blockchain Supply</title>
+  <!-- Add Bootstrap CSS for styling -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <style>
+    body {
+      padding-top: 60px;
+    }
+    .container {
+      max-width: 900px;
+    }
+    .supply-info {
+      margin-bottom: 40px;
+    }
+    .supply-info h1 {
+      font-size: 2.5rem;
+    }
+    .supply-info p {
+      font-size: 1.2rem;
+    }
+    .spinner-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100px;
+    }
+    .table-responsive {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Circulating and Distributed Supply Section -->
+    <div id="supply-info" class="supply-info text-center">
+      <!-- Loading Spinner -->
+      <div id="supply-spinner" class="spinner-container">
+        <div class="spinner-border text-primary" role="status">
+          <span class="sr-only">Loading Circulating Supply...</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Locked Accounts Table -->
+    <h2>Locked Accounts</h2>
+    <div class="table-responsive">
+      <!-- Loading Spinner for Locked Accounts -->
+      <div id="locked-accounts-spinner" class="spinner-container">
+        <div class="spinner-border text-primary" role="status">
+          <span class="sr-only">Loading Locked Accounts...</span>
+        </div>
+      </div>
+      <table id="locked-accounts-table" class="table table-striped table-bordered" style="display: none;">
+        <!-- Locked accounts table content will be inserted by JavaScript -->
+      </table>
+    </div>
+
+    <!-- Distributing Accounts Table -->
+    <h2>Distributing Accounts</h2>
+    <div class="table-responsive">
+      <!-- Loading Spinner for Distributing Accounts -->
+      <div id="distributing-accounts-spinner" class="spinner-container">
+        <div class="spinner-border text-primary" role="status">
+          <span class="sr-only">Loading Distributing Accounts...</span>
+        </div>
+      </div>
+      <table id="distributing-accounts-table" class="table table-striped table-bordered" style="display: none;">
+        <!-- Distributing accounts table content will be inserted by JavaScript -->
+      </table>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+  <!-- Custom JavaScript -->
+  <script src="/scripts/main.js"></script>
+</body>
+</html>
