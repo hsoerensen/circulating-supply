@@ -37,9 +37,10 @@ module.exports = async (req, res) => {
     // Check if circulating and distributed supply are cached
     let circulatingSupply = cache.get('circulatingSupply');
     let distributedSupply = cache.get('distributedSupply');
+    let lockedCirculatingSupply = cache.get('lockedCirculatingSupply');
     let percentDistributed = cache.get('percentDistributed');
 
-    if (!circulatingSupply || !distributedSupply || !percentDistributed) {
+    if (!circulatingSupply || !distributedSupply || !percentDistributed || !lockedCirculatingSupply) {
       // Get locked and distributing accounts balance
       const lockedBalance = await getAccountsBalance(lockedAccounts);
       const distributingBalance = await getAccountsBalance(distributingAccounts);
@@ -53,6 +54,7 @@ module.exports = async (req, res) => {
       // Convert from atomic units to base units (decimals)
       circulatingSupply = Number(calculatedSupplyAtomic) / 1e6;
       distributedSupply = Number(calculatedDistributedSupply) / 1e6;
+      lockedCirculatingSupply = Number(lockedBalance) / 1e6;
 
       // Calculate the percentage of the total supply that is distributed
       percentDistributed = (distributedSupply / 10_000_000_000) * 100;
@@ -61,12 +63,14 @@ module.exports = async (req, res) => {
       cache.set('circulatingSupply', circulatingSupply);
       cache.set('distributedSupply', distributedSupply);
       cache.set('percentDistributed', percentDistributed);
+      cache.set('lockedCirculatingSupply', lockedCirculatingSupply)
     }
 
     // Send the combined response with circulating supply, distributed supply, and percent distributed
     res.status(200).json({
       circulatingSupply: circulatingSupply.toFixed(6), // Circulating supply in base units
       distributedSupply: distributedSupply.toFixed(6), // Distributed supply in base units
+      lockedCirculatingSupply: lockedCirculatingSupply.toFixed(6), // Locked circulating supply in base units
       percentDistributed: percentDistributed.toFixed(2), // Percent distributed, rounded to 2 decimals
       lockedAccounts: lockedAccounts,
       distributingAccounts: distributingAccounts
